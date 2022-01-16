@@ -27,9 +27,9 @@ function loadTable() {
         }
 
         trHTML += '<td><img src="Style/'+ colorStatus + '.png" style="width: 30px"></td>';
-        trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox('+object['id']+')">Edit</button>';
-        trHTML += '<button type="button" class="btn btn-outline-secondary" onclick="showDetails('+object['id']+')">Detail</button>'
-        trHTML += '<button type="button" class="btn btn-outline-danger" onclick="userDelete('+object['id']+')">Del</button></td>';
+        trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox('+object['id']+')"><i class="fa fa-pencil"></i></button>';
+        trHTML += ' <button type="button" class="btn btn-outline-info" onclick="showDetails('+object['id']+')"><i class="fa fa-info"></i></button>'
+        trHTML += ' <button type="button" class="btn btn-outline-danger" onclick="userDelete('+object['id']+')"><i class="fa fa-trash"></button></td>';
 
         trHTML += "</tr>";
       }

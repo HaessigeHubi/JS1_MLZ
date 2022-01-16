@@ -12,3 +12,18 @@ function userDelete(id) {
     } 
   };
 }
+
+function deleteAll() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("DELETE", "http://localhost:3000/stock", true);
+  xhttp.send();
+  xhttp.onload = function() {
+    if (this.status == 200) {
+      console.log(this.response);
+      const response = this.response;
+      Swal.fire(response);
+      loadTable();
+    } 
+  };
+}
+

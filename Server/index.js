@@ -39,7 +39,11 @@ app.use(bodyParse.json());
 app.post('/stock', (req, res) => {
     const stock = req.body;
     console.log(stock);
-    stock.id = parseInt(portfolio[portfolio.length - 1].id) + 1;
+    if(portfolio.length!=0){
+        stock.id = parseInt(portfolio[portfolio.length - 1].id) + 1;
+    } else{
+        stock.id = 1;
+    }
     portfolio.push(stock);
     res.send('Stock '+ stock.Stock + ' was added to the portfolio')
 });
@@ -92,6 +96,15 @@ app.delete('/stock/:id', (req, res) =>{
     })
     res.send('Stock ' + name + ' was deleted. ID ' + id);
 });
+
+
+//DELETE ALL Stocks
+app.delete('/stock', (req, res) =>{
+    console.log("DELETE all Stock");
+    portfolio = [];
+    res.send('Everything was deleted');
+});
+
 
 function updatePrices(){  
 

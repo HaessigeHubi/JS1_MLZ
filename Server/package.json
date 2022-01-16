@@ -1,0 +1,19 @@
+{
+  "name": "js1_mlz",
+  "version": "1.0.0",
+  "description": "MLZ für den Java Script Unterricht",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Oliver Huber",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
+    "yahoo-stock-prices": "^1.1.0"
+  }
+}

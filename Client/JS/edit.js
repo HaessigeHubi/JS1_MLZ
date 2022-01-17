@@ -21,11 +21,39 @@ function showUserEditBox(id) {
           'Stock<input id="Stock" readonly class="swal2-input" placeholder="Stock" value="'+stock['Stock']+'">' +
           'Amount<input id="Amount" class="swal2-input" placeholder="Username" value="'+stock['Amount']+'">' +
           'Starting<input id="Starting" class="swal2-input" placeholder="Email" value="'+stock['Starting']+'">',
-        focusConfirm: false,
+        confirmButtonText: 'Edit',
+        showCloseButton: true,
+        stopKeydownPropagation: false,
+        showCancelButton: true,
+        allowOutsideClick: false,
+        focusConfirm: true,
         preConfirm: () => {
+          const Company = Swal.getPopup().querySelector('#Company').value
+          const Stock = Swal.getPopup().querySelector('#Stock').value
+          const Amount = Swal.getPopup().querySelector('#Amount').value
+          const Starting = Swal.getPopup().querySelector('#Starting').value
+          //API Call to check if Stock is Valid
+          if(!Company){ 
+            Swal.showValidationMessage('Enter a Company')   
+          } 
+          if(!Stock){ 
+            Swal.showValidationMessage('Enter a Stock')   
+          } 
+          if(!Amount || isNaN(parseInt(Amount))){ 
+            Swal.showValidationMessage('Amount is Empty or not a Number')   
+          } 
+          if(!Starting || isNaN(parseInt(Starting))){ 
+            Swal.showValidationMessage('Starting Price is Empty or not a Number')   
+          }  
+          return{CompanyText: Company}
+        }
+      }).then((result) =>{
+        console.log(result);
+        if(result.isConfirmed){
           userEdit();
         }
       })
+
     }
   };
 }

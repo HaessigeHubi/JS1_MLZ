@@ -83,5 +83,6 @@ function searchTable() {
   }
 };
 
+
 //Initial Load of the table
 loadTable();

@@ -53,7 +53,6 @@ function showUserEditBox(id) {
           userEdit();
         }
       })
-
     }
   };
 }

@@ -106,7 +106,7 @@ app.delete('/stock/:id', (req, res) =>{
         name = i.name;
         return false;
     })
-    res.send('Stock ' + name + ' was deleted. ID ' + id);
+    res.send('Stock was deleted. ID ' + id);
 });
 
 

@@ -6,6 +6,7 @@ const dataPrices = require('yahoo-stock-prices');
 const app = express();
 const port = 3000;
 
+//Initial Portfolio Array
 let portfolio = [
     {
         "id": 1,
@@ -29,7 +30,6 @@ let portfolio = [
 app.use(cors());
 
 //Body parser
-
 app.use(bodyParse.urlencoded({
     extended: false
 }));
@@ -39,6 +39,7 @@ app.use(bodyParse.json());
 app.post('/stock', (req, res) => {
     const stock = req.body;
     console.log(stock);
+    //Calculating the Array Identifier (1 when array is empty)
     if(portfolio.length!=0){
         stock.id = parseInt(portfolio[portfolio.length - 1].id) + 1;
     } else{
@@ -48,12 +49,12 @@ app.post('/stock', (req, res) => {
     res.send('Stock '+ stock.Stock + ' was added to the portfolio')
 });
 
-//POST for Stocks
+//PUT for Stocks
 app.put('/stock', (req, res) => {
     const id = req.body.id;
     const newStock = req.body;
-
     console.log(newStock);
+    //Searching for matching ID
     for(let i = 0; i < portfolio.length; i++){
         let stock = portfolio[i];
         if(stock.id == newStock.id){
@@ -64,15 +65,16 @@ app.put('/stock', (req, res) => {
     res.send('Stock ' + newStock.Stock + ' was edited')
 });
 
-//GETTER for Stocks
+//GETTER for all Stocks
 app.get('/stock', (req, res) => {
     updatePrices();
     res.send(portfolio);
 });
 
-//GETTER with ID for Stocks
+//GETTER for single Stock with ID 
 app.get('/stock/:id', (req, res) => {
     const id = req.params.id;
+    //Sending back the Stock with matching ID
     for(let stock of portfolio){
         if(stock.id == id){
             res.send(stock);
@@ -87,6 +89,7 @@ app.delete('/stock/:id', (req, res) =>{
     const id = req.params.id;
     var name = 'Undefined';
     console.log("DELETE Stock" + id);
+    //Filter to Delete the matching stock
     portfolio = portfolio.filter(i =>{
         if(i.id != id){
             return true;
@@ -105,31 +108,10 @@ app.delete('/stock', (req, res) =>{
     res.send('Everything was deleted');
 });
 
-
-function updatePrices(){  
-
-    for(let i = 0; i < portfolio.length; i++){
-        let stock = portfolio[i];
-        console.log("Check Price for " + stock.Stock)
-        dataPrices.getCurrentPrice(stock.Stock, (err, price) => {
-            if(!price){
-                stock.Current = NaN;
-            } else{
-                stock.Current = price;
-                stock.balance = (stock.Amount * stock.Current) - (stock.Amount * stock.Starting);
-                console.log(stock);
-            }
-            
-            console.log(price); // 132.05
-        });
-    }
-
-}
-
-
-//GETTER with ID for Stocks
+//GETTER for Stock Validity
 app.get('/valid/:stock', (req, res) => {
     const stock = req.params.stock;
+    //Function has an empty price, when the stock wasn't found
     dataPrices.getCurrentPrice(stock, (err, price) => {
         if(!price){
             console.log("NOK");
@@ -141,4 +123,24 @@ app.get('/valid/:stock', (req, res) => {
     });
 });
 
+//Function for checking Current Stock Prices and updating all Stocks
+function updatePrices(){  
+    for(let i = 0; i < portfolio.length; i++){
+        let stock = portfolio[i];
+        console.log("Check Price for " + stock.Stock)
+        //Function Gets all current Market Prices for stock.Stock
+        dataPrices.getCurrentPrice(stock.Stock, (err, price) => {
+            if(!price){
+                stock.Current = NaN;
+            } else{
+                stock.Current = price;
+                stock.balance = (stock.Amount * stock.Current) - (stock.Amount * stock.Starting);
+                console.log(stock);
+            }
+            console.log(price); // 132.05
+        });
+    }
+}
+
+//LISTENER for Port 3000
 app.listen(port, () => console.log(`The app is listening on port ${port}!`));

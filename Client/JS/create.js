@@ -1,3 +1,8 @@
+/*
+ Function when the Create Butten is Pressed in index.html.
+ Addes a SweetAlert Pop Up, with a Form, which will be used in the userCreate() function
+*/
+
 function showUserCreateBox() {
   let flatpickrInstance
   Swal.fire({

@@ -1,5 +1,6 @@
 .bg-mynav {
   background-color: #3e77b1;
+  background-image: url('Style/portfolio.png');
 }
 
 body {
@@ -11,7 +12,7 @@ td {
     line-height: 3rem;
 }
 
-#myInput {
+#userInput {
   background-image: url('searchicon.png'); /* Add a search icon to input */
   background-position: 10px 12px; /* Position the search icon */
   background-repeat: no-repeat; /* Do not repeat the icon image */

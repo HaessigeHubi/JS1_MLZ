@@ -1,8 +1,24 @@
+/*
+  This function loads all the data from the API /stock.
+
+  The response is an Array with the stock information. With the following elements
+        "id": 1,
+        "Company":"Tesla",
+        "Stock":"TSLA",
+        "Amount":10,
+        "Current":1050,
+        "Starting":519,
+        "balance" : 0
+*/
 function loadTable() {
+
+  //REST GET Request to /stock
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/stock", true);
   xhttp.send();
   xhttp.responseType = 'json';
+
+  //On Load it updates the existing table
   xhttp.onload = function() {
     var status = xhttp.status;
     console.log(status);
@@ -18,6 +34,7 @@ function loadTable() {
         trHTML += '<td>'+object['Stock']+'</td>';
         trHTML += '<td>'+object['Amount']+'</td>';
 
+        //Status of the Stock, according to the balance
         if(object.balance > 0){
           colorStatus = "green";
         } else if(object.balance < 0){
@@ -33,10 +50,17 @@ function loadTable() {
 
         trHTML += "</tr>";
       }
+
+      //The String trHTML will be added to the innerHTML of the existing table
       document.getElementById("mytable").innerHTML = trHTML;
     }
   };
 };
+
+/*Table Search Function for "mytable"
+Solution from w3c School -> https://www.w3schools.com/howto/howto_js_filter_table.asp
+Changed to fit my table */
+
 function searchTable() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;

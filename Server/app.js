@@ -5,7 +5,6 @@ const dataPrices = require('yahoo-stock-prices');
 
 const app = express();
 const port = 3000;
-
 //Initial Portfolio Array
 let portfolio = [
     {

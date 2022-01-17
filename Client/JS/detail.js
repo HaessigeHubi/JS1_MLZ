@@ -1,11 +1,14 @@
+/*
+ Showing the User the Details of one Stock.
+ Opens a Dialog, where he can't edit anything.
+*/
+
 function showDetails(id) {
   console.log(id);
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/stock/"+id, true);
   xhttp.send();
   xhttp.responseType = 'json';
-
-
 
   xhttp.onload = function() {
     var status = xhttp.status;
@@ -15,6 +18,8 @@ function showDetails(id) {
       const stock = this.response;
       console.log(stock);
       let balanceColor = 'text-success';
+      
+      //Color of the text changes according to the balance 
       if(stock.balance < 0){
         balanceColor = 'text-danger';
       }

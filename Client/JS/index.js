@@ -1,7 +1,7 @@
 /*
   This function loads all the data from the API /stock.
 
-  The response is an Array with the stock information. With the following elements
+  The response is an Array with the stock information. With the following elements (example)
         "id": 1,
         "Company":"Tesla",
         "Stock":"TSLA",
@@ -83,8 +83,5 @@ function searchTable() {
   }
 };
 
+//Initial Load of the table
 loadTable();
-
-
-
-

@@ -1,3 +1,4 @@
+/* Function opens an Edit Formular for the User, where he can change the values */
 function showUserEditBox(id) {
   console.log(id);
   const xhttp = new XMLHttpRequest();
@@ -11,6 +12,7 @@ function showUserEditBox(id) {
       console.log(xhttp.response);
       const stock = this.response;
       console.log(stock);
+      //Opening Formular
       Swal.fire({
         title: 'Edit Stock',
         html:
@@ -28,6 +30,7 @@ function showUserEditBox(id) {
   };
 }
 
+/* Sending edited User to the API */
 function userEdit() {
 
   const id = document.getElementById("id").value;
@@ -35,7 +38,7 @@ function userEdit() {
   const Stock = document.getElementById("Stock").value;
   const Amount = document.getElementById("Amount").value;
   const Starting = document.getElementById("Starting").value;
-    
+  //PUT API Call
   const xhttp = new XMLHttpRequest();
   xhttp.open("PUT", "http://localhost:3000/stock");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");

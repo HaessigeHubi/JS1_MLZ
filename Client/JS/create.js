@@ -5,6 +5,7 @@
 
 function showUserCreateBox() {
   let flatpickrInstance
+  //Pop Up for the Input
   Swal.fire({
     title: 'Create stock',
     html:
@@ -20,16 +21,19 @@ function showUserCreateBox() {
     showCancelButton: true,
     allowOutsideClick: false,
     focusConfirm: true,
+    //Date Picker Plugin
     willOpen: () => {
       flatpickrInstance = flatpickr(
         Swal.getPopup().querySelector('#buy-date')
       )
     },
+    //When Confirming it makes the following checks
     preConfirm: () => {
       const Company = Swal.getPopup().querySelector('#Company').value
       const Stock = Swal.getPopup().querySelector('#Stock').value
       const Amount = Swal.getPopup().querySelector('#Amount').value
       const Starting = Swal.getPopup().querySelector('#Starting').value
+      //API Call to check if Stock is Valid
       var isStockValid = validStock(Stock);
       if(!Company){ 
         Swal.showValidationMessage('Enter a Company')   
@@ -56,7 +60,7 @@ function showUserCreateBox() {
   })
 }
 
-
+/* Function Adds to user to the portfolio Array over the POST api */
 function userCreate() {
   const Company = document.getElementById("Company").value;
   const Stock = document.getElementById("Stock").value;
@@ -86,6 +90,7 @@ function userCreate() {
   };
 }
 
+//Call to check if the Stock is valid 
 function validStock(stock) {
   console.log(stock);
   const xhttp = new XMLHttpRequest();

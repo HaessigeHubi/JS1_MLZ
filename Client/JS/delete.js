@@ -1,4 +1,4 @@
-
+/* Send one stock to the API to delete*/
 function userDelete(id) {
   const xhttp = new XMLHttpRequest();
   xhttp.open("DELETE", "http://localhost:3000/stock/"+id, true);
@@ -12,7 +12,7 @@ function userDelete(id) {
     } 
   };
 }
-
+/* API will delete all Stocks (ID not needed)*/
 function deleteAll() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("DELETE", "http://localhost:3000/stock", true);

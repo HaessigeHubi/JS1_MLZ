@@ -11,22 +11,24 @@
     <link href="Style/index.css" rel="stylesheet">
   </head>
   <body>
-    
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-dark bg-mynav">
       <div class="container-fluid">
         <a class="navbar-brand" href="#" style="background-image: url('Style/portfolio.png'); width: 100px;">My Portfolio</a>
       </div>
     </nav>
-
+    <!-- On Top of the Table -->
     <div class="container">
       <div class="d-flex bd-highlight mb-3">
         <div class="me-auto p-2 bd-highlight"><h2>Stock</div>
         <div class="p-2 bd-highlight">
           <button type="button" class="btn btn-primary" onclick="showUserCreateBox()">Create</button>
+          <button type="button" class="btn btn-primary" onclick="location.reload(); ">Refresh</button>
         </div>
       </div>
       <input type="text" id="userInput" onkeyup="searchTable()" placeholder="Search for Company..">
 
+    <!-- Stock Table -->
       <div class="table-responsive">
         <table class="table" id="stockTable">
           <thead>
@@ -45,16 +47,17 @@
           </tbody>
         </table>
       </div>
-      
+    <!-- Footer Buttons -->
       <div class="p-2 bd-highlight">
         <button type="button" class="btn btn-danger red" onclick="deleteAll()">Delete all</button>
-      
-        <button type="button" class="btn btn-secondary red" onclick="importFile()">Import</button>
-    
+        <button type="button" class="btn btn-secondary red" onclick="importTrigger()">Import</button>
         <button type="button" class="btn btn-secondary red" onclick="exportFile()">Export</button>
+      </div>
+      <div class="mb-3" id="importDiv" style="display: none;">
+        <input class="form-control" type="file" id="fileInput">
+      </div>
     </div>
-      
-    </div>
+    
  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="JS/index.js"></script>
     <script src="JS/create.js"></script>

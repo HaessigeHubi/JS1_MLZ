@@ -38,7 +38,6 @@ app.use(bodyParse.json());
 //POST for Stocks
 app.post('/stock', (req, res) => {
     const stock = req.body;
-    console.log(stock);
     //Calculating the Array Identifier (1 when array is empty)
     if(portfolio.length!=0){
         stock.id = parseInt(portfolio[portfolio.length - 1].id) + 1;
@@ -53,13 +52,23 @@ app.post('/stock', (req, res) => {
 app.put('/stock', (req, res) => {
     const id = req.body.id;
     const newStock = req.body;
-    console.log(newStock);
+    let contains = false;
     //Searching for matching ID
     for(let i = 0; i < portfolio.length; i++){
         let stock = portfolio[i];
         if(stock.id == newStock.id){
             portfolio[i] = newStock;
+            contains = true;
         }
+    }
+    if(!contains){
+     //Adding the Stock if it's Missing    
+        if(portfolio.length!=0){
+            newStock.id = parseInt(portfolio[portfolio.length - 1].id) + 1;
+        } else{
+            newStock.id = 1;
+        }
+        portfolio.push(newStock);
     }
 
     res.send('Stock ' + newStock.Stock + ' was edited')
@@ -135,7 +144,6 @@ function updatePrices(){
             } else{
                 stock.Current = price;
                 stock.balance = (stock.Amount * stock.Current) - (stock.Amount * stock.Starting);
-                console.log(stock);
             }
             console.log(price); // 132.05
         });
